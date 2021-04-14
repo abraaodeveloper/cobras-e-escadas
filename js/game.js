@@ -68,13 +68,12 @@ function frameUpdate() {
     for (let i = 0; i < cobrasEscadas.tabuleiro.length; i++) {
         context.rect(cobrasEscadas.tabuleiro[i].x, cobrasEscadas.tabuleiro[i].y, tamanho, tamanho);
         context.font = "15px Arial";
-        context.fillText(i + 1, cobrasEscadas.tabuleiro[i].x + 10, cobrasEscadas.tabuleiro[i].y + 35);
+        context.fillText(i, cobrasEscadas.tabuleiro[i].x + 10, cobrasEscadas.tabuleiro[i].y + 35);
     }
     context.stroke();
     */
 
     window.requestAnimationFrame(frameUpdate);
 }
-
 
 frameUpdate();

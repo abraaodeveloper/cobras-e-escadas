@@ -3,10 +3,11 @@ export default class Jogador {
     posicaoOndeIr = 0;
     refTabuleiro;
     callback;
-    passo = 5;
+    passo = 1;
     qtdPassosVoltando = 0;
     qtdPassosIndo = 0;
     podeMover = false;
+    indoParafrente = true;
 
     constructor(nome, img, tabuleiro) {
         this.x = -1;
@@ -34,7 +35,7 @@ export default class Jogador {
 
         this.podeMover = true;
         if (this.refTabuleiro.lenght <= this.posicaoOndeIr) {
-            this.qtdPassosIndo = (this.refTabuleiro.lenght - 1) - this.posicao;
+            this.qtdPassosIndo = (this.refTabuleiro.lenght - 1) - this.posicao+3;
             this.qtdPassosVoltando = this.posicaoOndeIr - (this.refTabuleiro.lenght - 1);// ver se esse -1 esta coreeto 
         }
     }
@@ -57,7 +58,6 @@ export default class Jogador {
             if (this.posicao === this.posicaoOndeIr) {
 
                 this.podeMover = false;
-                console.log(this.posicaoOndeIr + " - " + this.posicao);
                 if (this.callback != null) this.callback();
                 this.callback = null;
 

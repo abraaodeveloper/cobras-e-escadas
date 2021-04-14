@@ -40,27 +40,39 @@ export default class CobrasEscadas {
         }
 
         if (this.vez === 1) {
-            this.jogando = true;
-            const novaPosicao = this.jogador1.posicao + dado1 + dado2;
-            this.jogador1.moverAte(novaPosicao, () => {
-                this.jogando = false;
-                console.log("passou na callback");
-                if (this.jogador1.posicao === 99)
-                    this.vencedor = jogador1;
-
-                this.vez = dado1 === dado2 ? this.vez : this.vez * -1;
-            });
-
+            this._moverJogador(this.jogador1, dado1 , dado2);
         } else {
-            this.jogando = true;
-            const novaPosicao = this.jogador2.posicao + dado1 + dado2;
-            this.jogador2.moverAte(novaPosicao, () => {
-                this.jogando = false;
-                if (this.jogador2.posicao === 99)
-                    this.vencedor = jogador2;
-
-                this.vez = dado1 === dado2 ? this.vez : this.vez * -1;
-            });
+            this._moverJogador(this.jogador2,  dado1 , dado2);
         }
+    }
+
+    _moverJogador(jogador, dado1 , dado2){
+        this.jogando = true;
+        const novaPosicao = jogador.posicao + dado1 + dado2;
+        jogador.moverAte(novaPosicao, () => {
+            this.jogando = false;
+            if (jogador.posicao === 99)
+                this.vencedor = jogador;
+
+            for (const cobra of this.cobras) {                
+                if((jogador.posicao + 1) == (cobra.cabeça)){
+                    //console.log("cobra: "+(cobra.cabeça)+" <-> posJogador"+ (jogador.posicao));
+                    jogador.posicao = cobra.cauda-1;
+                    jogador.x = this.tabuleiro[cobra.cauda-1].x;
+                    jogador.y = this.tabuleiro[cobra.cauda-1].y;
+                }
+            }
+
+            for (const escada of this.escadas) {              
+                if((jogador.posicao + 1 ) == (escada.base)){
+                    //console.log("escada: "+(escada.base) +" <->  posJogador"+ (jogador.posicao));
+                    jogador.posicao = escada.topo-1;
+                    jogador.x = this.tabuleiro[escada.topo-1].x;
+                    jogador.y = this.tabuleiro[escada.topo-1].y;
+                }
+            }
+
+            this.vez = dado1 === dado2 ? this.vez : this.vez * -1;
+        });
     }
 }
