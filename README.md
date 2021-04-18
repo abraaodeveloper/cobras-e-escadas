@@ -11,8 +11,3 @@ Ter algum server para executar o projeto.
 
 Basta abrir o projeto com o Visual studio Code e clicar em 'Live server' no canto inferior direito
 
-## Notas:
-O Projeto não está totalmente finalizado, faltou algumas partes pois esses desafios não estavam previstos nos meus horários.
-Peço desculpas, mas pretendo finalizalo!
-
-Espero que goste!
